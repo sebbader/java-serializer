@@ -30,8 +30,8 @@ jobs:
         run: mvn -P MavenCentral -U clean license:format package
 
       - name: Publish to Apache Maven Central
-        run: mvn -P MavenCentral license:format deploy -Dgpg.passphrase=${{ secrets.MAVEN_GPG_PASSPHRASE }}
+        run: mvn -P MavenCentral -p dataformat-json,dataformat-core license:format deploy -Dgpg.passphrase=${{ secrets.GPG_KEY_PASSWORD }}
         env:
           OSSRH_USERNAME: sebbader
           OSSRH_PASSWORD: ${{ secrets.SEBBADER_OSSHR_PASSWORD }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_KEY_PASSWORD }}
