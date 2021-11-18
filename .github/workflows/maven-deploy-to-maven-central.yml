@@ -1,0 +1,40 @@
+# This workflow will deploy the Serializers and the Validator to the sonatype
+# staging environment. This will NOT automatically publish the artifacts. An
+# authorized user must still manually close the staging repository first.
+
+name: Generate and Deploy to Sonatype
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: s4u/maven-settings-action@v2.4.1
+        with:
+          servers: '[{ "id": "ossrh", "username": "sebbader", "password": "${{ secrets.SEBBADER_OSSHR_PASSWORD }}" }]'
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          cache: maven
+
+      - name: Import GPG key
+        id: import_gpg
+        uses: crazy-max/ghaction-import-gpg@v4
+        with:
+          gpg_private_key: ${{ secrets.MYGPGKEY_SEC }}
+          passphrase: ${{ secrets.GPG_KEY_PASSWORD }}
+
+      - name: Build with Maven
+        run: mvn -P MavenCentral -U clean license:format package
+
+      - name: deploy library to sonatype
+        run: mvn -P MavenCentral license:format deploy
