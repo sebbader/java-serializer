@@ -21,10 +21,10 @@ jobs:
           java-version: 11
           distribution: 'adopt'
           server-id: ossrh
-          server-username: "sebbader"
-          server-password: "${{ secrets.SEBBADER_OSSHR_PASSWORD }}"
-          gpg-private-key: "${{ secrets.MYGPGKEY_SEC }}"
-          gpg-passphrase: "${{ secrets.GPG_KEY_PASSWORD }}"
+          server-username: OSSRH_USERNAME
+          server-password: OSSRH_PASSWORD
+          gpg-private-key: ${{ secrets.MYGPGKEY_SEC }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
           settings-path: ${{ github.workspace }} # location for the settings.xml file
 
       #- name: Build with Maven
