@@ -39,3 +39,4 @@ jobs:
           OSSRH_USERNAME: sebbader
           OSSRH_PASSWORD: ${{ secrets.SEBBADER_OSSHR_PASSWORD }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_KEY_PASSWORD }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_KEY_PASSWORD }}
