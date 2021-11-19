@@ -25,6 +25,7 @@ jobs:
           server-password: ${{ secrets.SEBBADER_OSSHR_PASSWORD }}
           gpg-private-key: ${{ secrets.MYGPGKEY_SEC }}
           gpg-passphrase: ${{ secrets.GPG_KEY_PASSWORD }}
+          settings-path: ${{ github.workspace }}
 
       #- name: Build with Maven
       #  run: mvn -P MavenCentral -pl dataformat-json,dataformat-core  -U clean license:format package
@@ -33,7 +34,7 @@ jobs:
         run:  echo ::set-output name=version::$(cat $GITHUB_WORKSPACE/settings.xml) 
       
       - name: Publish to Apache Maven Central
-        run: mvn -P MavenCentral -pl dataformat-core license:format deploy #${{ secrets.MAVEN_GPG_PASSPHRASE }}
+        run: mvn -P MavenCentral -pl dataformat-core license:format deploy -s $GITHUB_WORKSPACE/settings.xml #${{ secrets.MAVEN_GPG_PASSPHRASE }}
         env:
           OSSRH_USERNAME: sebbader
           OSSRH_PASSWORD: ${{ secrets.SEBBADER_OSSHR_PASSWORD }}
