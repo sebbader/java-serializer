@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/SETTINGS/1.0.0">
-  <servers>
-		<server>
-			<id>0xDFCC34A6</id>
-			<passphrase>{{ secrets.GPG_KEY_PASSWORD }}</passphrase>
-		</server>
-  </servers>
-</settings>
